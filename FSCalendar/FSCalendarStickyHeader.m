@@ -83,8 +83,8 @@
 
         CGFloat titleHeight = [@"1" sizeWithAttributes:@{NSFontAttributeName:_appearance.preferredHeaderTitleFont}].height*1.5 + weekdayMargin*3;
 
-        _separator.frame = CGRectMake(0, _contentView.fs_height-weekdayHeight-weekdayMargin*2, _contentView.fs_width, 1.0);
-        _titleLabel.frame = CGRectMake(0, _separator.fs_bottom-titleHeight-weekdayMargin, titleWidth,titleHeight);
+        _separator.frame = CGRectMake(0, _contentView.fs_height+weekdayHeight/2-weekdayMargin*8, _contentView.fs_width, 1.0);
+        _titleLabel.frame = CGRectMake(0, _separator.fs_bottom-weekdayHeight-titleHeight-weekdayMargin, titleWidth,titleHeight);
 
     }
 
