@@ -27,32 +27,34 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+
         _needsAdjustingViewFrame = YES;
-        
+
         UIView *view;
         UILabel *label;
-        
+
         view = [[UIView alloc] initWithFrame:CGRectZero];
         view.backgroundColor = [UIColor clearColor];
         [self addSubview:view];
         self.contentView = view;
-        
+
         label = [[UILabel alloc] initWithFrame:CGRectZero];
-        label.textAlignment = NSTextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentLeft;
+        label.font = [UIFont fontWithName:@"MyriadPro-Regular" size:22.f];
         label.numberOfLines = 0;
         [_contentView addSubview:label];
         self.titleLabel = label;
-        
+
         view = [[UIView alloc] initWithFrame:CGRectZero];
         view.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.25];
         [_contentView addSubview:view];
         self.separator = view;
-        
+
         NSMutableArray *weekdayLabels = [NSMutableArray arrayWithCapacity:7];
         for (int i = 0; i < 7; i++) {
             label = [[UILabel alloc] initWithFrame:CGRectZero];
             label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont fontWithName:@"MyriadPro-Regular" size:22.f];
             [_contentView addSubview:label];
             [weekdayLabels addObject:label];
         }
@@ -64,9 +66,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+
     if (_needsAdjustingViewFrame) {
-        
+
         _needsAdjustingViewFrame = NO;
         _contentView.frame = self.bounds;
 
@@ -74,18 +76,18 @@
         CGFloat weekdayHeight = _calendar.preferedWeekdayHeight;
         CGFloat weekdayMargin = weekdayHeight * 0.1;
         CGFloat titleWidth = _contentView.fs_width;
-        
+
         [_weekdayLabels enumerateObjectsUsingBlock:^(UILabel *label, NSUInteger index, BOOL *stop) { \
             label.frame = CGRectMake(index*weekdayWidth, _contentView.fs_height-weekdayHeight-weekdayMargin, weekdayWidth, weekdayHeight);
         }];
-        
+
         CGFloat titleHeight = [@"1" sizeWithAttributes:@{NSFontAttributeName:_appearance.preferredHeaderTitleFont}].height*1.5 + weekdayMargin*3;
-        
+
         _separator.frame = CGRectMake(0, _contentView.fs_height-weekdayHeight-weekdayMargin*2, _contentView.fs_width, 1.0);
         _titleLabel.frame = CGRectMake(0, _separator.fs_bottom-titleHeight-weekdayMargin, titleWidth,titleHeight);
-        
+
     }
-    
+
     [self reloadData];
 }
 
